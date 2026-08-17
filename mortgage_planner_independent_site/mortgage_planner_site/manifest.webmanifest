@@ -1,0 +1,10 @@
+{
+  "name": "家庭房貸規劃器",
+  "short_name": "房貸規劃器",
+  "description": "新青安、國土署追加貸款與多段利率試算",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f8f7",
+  "theme_color": "#315c55",
+  "lang": "zh-Hant"
+}
