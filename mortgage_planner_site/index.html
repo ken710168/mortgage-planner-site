@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#315c55">
+  <meta name="description" content="新青安、國土署追加貸款、多段利率與每期還款明細試算工具。">
+  <title>家庭房貸規劃器</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><h1>房貸＋國土署追加貸款試算器</h1><div class="sub">本息平均攤還｜多段利率｜任一期追加貸款｜CSV 匯出</div></div>
+    <div class="actions"><button class="btn" id="installBtn" style="display:none">安裝 App</button><button class="btn" id="resetBtn">恢復預設</button><button class="btn primary" id="calcBtn">重新計算</button></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="loan">貸款設定</button>
+    <button class="tab" data-tab="result">計算結果</button>
+  </div>
+
+  <section id="loan" class="panel active">
+    <div class="card">
+      <h2>主要房貸</h2>
+      <div class="grid">
+        <label>目前剩餘本金（元）<input id="principal" type="number" value="6500000"></label>
+        <label>目前年利率（%）<input id="currentRate" type="number" step="0.001" value="1.775"></label>
+        <label>主要房貸剩餘寬限期（月）<input id="mainGrace" type="number" value="60"></label>
+        <label>剩餘年數<input id="years" type="number" value="40"></label>
+        <label>額外剩餘月數<input id="months" type="number" min="0" max="11" value="0"></label>
+        <label>本期銀行實際需繳（可留空）<input id="actualPayment" type="number" placeholder="例如 25000"></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="loanHead"><div><h2 style="margin-bottom:4px">主要房貸未來利率變動</h2><div class="muted">設定「第幾期起」的新利率，可依實際政策任意增刪。</div></div><button class="btn" id="addRate">＋新增利率</button></div>
+      <div id="rateRows"></div>
+    </div>
+
+    <div class="card">
+      <div class="loanHead"><div><h2 style="margin-bottom:4px">國土署／其他追加貸款</h2><div class="muted">指定某一期才撥款；每筆貸款獨立計息與攤還，最後合併成家庭總月付。</div></div><button class="btn" id="addExtra">＋新增貸款</button></div>
+      <div id="extraLoans"></div>
+    </div>
+  </section>
+
+  <section id="result" class="panel">
+    <div class="metrics">
+      <div class="metric"><div class="k">本期理論月付</div><div class="v" id="mCurrent">－</div></div>
+      <div class="metric"><div class="k">最高單月月付</div><div class="v" id="mPeak">－</div></div>
+      <div class="metric"><div class="k">全部貸款總利息</div><div class="v" id="mInterest">－</div></div>
+      <div class="metric"><div class="k">全部借款總額</div><div class="v" id="mBorrowed">－</div></div>
+      <div class="metric"><div class="k">本期後剩餘本金</div><div class="v" id="mBalance">－</div></div>
+    </div>
+    <div id="compare" class="callout" style="display:none"></div>
+
+    <div class="card"><div class="loanHead"><h2>重要節點</h2></div><div class="tableWrap"><table><thead><tr><th>期數</th><th>事件</th><th>主要房貸</th><th>追加貸款</th><th>合計月付</th></tr></thead><tbody id="eventBody"></tbody></table></div></div>
+    <div class="card"><div class="loanHead"><h2>每期還款明細</h2><div class="actions"><button class="btn" id="csvBtn">匯出 CSV</button></div></div><div class="tableWrap"><table><thead><tr><th>期數</th><th>主要房貸</th><th>追加貸款</th><th>合計月付</th><th>本期利息</th><th>總剩餘本金</th></tr></thead><tbody id="detailBody"></tbody></table></div></div>
+    <div class="muted">實際銀行帳單可能因每日計息、撥款日、利率生效日、四捨五入與契約條款而有少量差異。本工具用於規劃試算。</div>
+  </section>
+</div>
+<footer class="siteFooter">家庭房貸規劃器｜資料只在你的瀏覽器中計算，不會上傳伺服器。</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>
